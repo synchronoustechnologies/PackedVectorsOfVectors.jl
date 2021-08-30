@@ -26,6 +26,7 @@ PackedVectorOfVectors(p,v) = PackedVectorOfVectors{typeof(p),typeof(v),typeof(vi
 Base.size(pv::PackedVectorOfVectors) = (length(pv.p)-1,)
 Base.getindex(pv::PackedVectorOfVectors, i::Int) = view(pv.v, pv.p[i]:pv.p[i+1]-1)
 Base.showarg(io::IO, pv::PackedVectorOfVectors, toplevel) = print(io, "pack(::Vector{Vector{", eltype(eltype(pv)), "}})")
+Iterators.flatten(pv::PackedVectorOfVectors) = pv.v
 
 
 """
