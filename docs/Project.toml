@@ -1,0 +1,6 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+PackedVectorsOfVectors = "7713531c-48ef-4bdd-9821-9ff7a8736089"
+
+[compat]
+Documenter = "0.27"
