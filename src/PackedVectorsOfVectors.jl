@@ -3,7 +3,8 @@ module PackedVectorsOfVectors
 export
     PackedVectorOfVectors,
     pack,
-    allocate_packed
+    allocate_packed,
+    packed_indices
 
 
 """
@@ -112,6 +113,28 @@ julia> allocate_packed(Ref{Int}, undef, [1,2,3])
 function allocate_packed(T::Type, init, n)
     p = cumsum1(n)
     v = Vector{T}(init, p[end]-1)
+    return PackedVectorOfVectors(p,v)
+end
+
+
+"""
+    packed_indices(n) -> pv::PackedVectorOfVectors
+
+Packed vector of vectors such that the `k`th nested vector has length `nth(n,k)`
+and `pv[k][i]` is the index in the flattened vector of the `i`th element in the
+`k`th nested vector.
+
+# Examples
+```jldoctest
+julia> packed_indices([2,3])
+2-element pack(::Vector{Vector{Int64}}):
+ 1:2
+ 3:5
+```
+"""
+function packed_indices(n)
+    p = cumsum1(n)
+    v = 1:p[end]-1
     return PackedVectorOfVectors(p,v)
 end
 
