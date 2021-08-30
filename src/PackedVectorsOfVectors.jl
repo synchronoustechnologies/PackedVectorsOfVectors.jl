@@ -97,7 +97,7 @@ end
     allocate_packed(T, init, n) -> PackedVectorOfVectors
 
 Allocate a packed vector of vectors with nested element type `T` such that the
-`n`th nested vector has length `nth(n,k)`. See the documentation of
+`k`th nested vector has length `nth(n,k)`. See the documentation of
 `Vector{T}(init,n)` regarding the meaning of `init`.
 
 # Examples
