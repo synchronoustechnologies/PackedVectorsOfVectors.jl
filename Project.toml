@@ -1,7 +1,7 @@
 name = "PackedVectorsOfVectors"
 uuid = "7713531c-48ef-4bdd-9821-9ff7a8736089"
 authors = ["Simon Etter <simon0etter@gmail.com>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [compat]
 julia = "1"
