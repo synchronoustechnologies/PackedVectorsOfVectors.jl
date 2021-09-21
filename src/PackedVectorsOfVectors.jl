@@ -4,6 +4,9 @@ export
     PackedVectorOfVectors,
     pack,
     allocate_packed,
+    packed_zeros,
+    packed_ones,
+    packed_fill,
     packed_indices
 
 
@@ -114,6 +117,34 @@ julia> allocate_packed(Ref{Int}, undef, [1,2,3])
 function allocate_packed(T::Type, init, n)
     p = cumsum1(n)
     v = Vector{T}(init, p[end]-1)
+    return PackedVectorOfVectors(p,v)
+end
+
+for f in (:zeros, :ones)
+    pf = Symbol(:packed_,f)
+    @eval begin
+        """
+            $($pf)([T=Float64,] n) -> pv::PackedVectorOfVectors
+
+        Create a packed vector of vectors such that `pv[k] == $($f)(T, nth(n,k))`.
+        """
+        function $pf(T::Type, n)
+            p = cumsum1(n)
+            v = $f(T, p[end]-1)
+            return PackedVectorOfVectors(p,v)
+        end
+        $pf(n) = $pf(Float64,n)
+    end
+end
+
+"""
+    packed_fill(x,n) -> pv::PackedVectorOfVectors
+
+Create a packed vector of vectors such that `pv[k] == fill(x, nth(n,k))`.
+"""
+function packed_fill(x, n)
+    p = cumsum1(n)
+    v = fill(x, p[end]-1)
     return PackedVectorOfVectors(p,v)
 end
 
