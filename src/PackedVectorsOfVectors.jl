@@ -32,7 +32,7 @@ Iterators.flatten(pv::PackedVectorOfVectors) = pv.v
 """
     cumsum1(v) -> p
 
-Cumulative sum of the iterable `v`, starting from `p[1] = 1`.
+Compute the cumulative sum of the iterable `v`, starting from `p[1] = 1`.
 
 # Examples
 ```jldoctest
